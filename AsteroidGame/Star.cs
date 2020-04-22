@@ -18,6 +18,10 @@ namespace AsteroidGame
         {
             g.DrawLine(Pens.White, _Position.X, _Position.Y, _Position.X + _Size.Width, _Position.Y + _Size.Height);
             g.DrawLine(Pens.White, _Position.X + _Size.Width, _Position.Y, _Position.X, _Position.Y + _Size.Height);
+            //g.DrawImage;
+            //Image asteroid = Image.FromFile("brownAsteroid.jpg");
+            //Point position = new Point(20, 20);
+            //g.DrawImage(asteroid, position);
         }
 
         public override void Update()
