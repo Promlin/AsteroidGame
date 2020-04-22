@@ -8,15 +8,28 @@ namespace AsteroidGame
 {
     static class Program
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            //создание формы
+            Form game_form = new Form();
+            //Screen.PrimaryScreen.WorkingArea.Height     для области по высоте экрана 
+            game_form.Width = 800;
+            game_form.Height = 600;
+
+            game_form.Show();
+
+            Game.Initialize(game_form);
+            Game.Load();
+            Game.Draw();
+
+            Application.Run(game_form);
+
+            System.Threading.Thread.Sleep(1000);
+            //Application.Run(); //внутри можно указать главное окно
         }
     }
 }
