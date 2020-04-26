@@ -68,23 +68,27 @@ namespace AsteroidGame
         /// <summary> Загрузка игровых объектов</summary>
         public static void Load()
         {
+            List<VisualObject> game_objects = new List<VisualObject>();
+
             __GameObjects = new VisualObject[30];
 
-            for (int i = 0; i < __GameObjects.Length / 2; i++)
+            for (int i = 0; i < 30; i++)
             {
-                __GameObjects[i] = new VisualObject(
+                game_objects.Add(new VisualObject(
                     new Point(600, i * 20),
                     new Point(15 - i, 20 - i),
-                    new Size(20, 20));
+                    new Size(20, 20)));
             }
 
-            for (int i = __GameObjects.Length / 2; i < __GameObjects.Length; i++)
+            for (int i = 0; i < 15; i++)
             {
-                __GameObjects[i] = new Star(
+                game_objects.Add(new Star(
                     new Point(600, i * 20),
                     new Point(-i, 0),
-                    10);
+                    10));
             }
+
+            __GameObjects = game_objects.ToArray();
         }
 
         public static void Update()
