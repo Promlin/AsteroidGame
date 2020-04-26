@@ -49,17 +49,19 @@ namespace ConsoleTest
 
             try
             {
-                throw new ApplicationException("Сообщение об ошибке");
+                ComputeLongValue(30, student);
             }
-            catch (ApplicationException error)
+            catch (ArgumentNullException error)
             {
-
+                combine_log.LogError(error.ToString());
+                combine_log.LogError(error.Message);
+                throw new ComputeException("Ошибка в значении входного параметра", error);
             }
             catch (Exception error)
             {
                 combine_log.LogError(error.ToString());
                 combine_log.LogError(error.Message);
-                throw;
+                throw new ComputeException("Произошла неизвестная ошибка", error);
             }
 
 
@@ -69,6 +71,12 @@ namespace ConsoleTest
 
         private static double ComputeLongValue(int Count, ILogger Log)
         {
+            if (Log is null)
+                throw new ArgumentNullException(nameof(Log));
+
+            if (Count <= 0)
+                throw new ArgumentOutOfRangeException(nameof(Count), Count, "Число итерации должно быть больше 0");
+
             int result = 0;
             for (int i = 0; i < Count; i++)
             {
@@ -81,4 +89,14 @@ namespace ConsoleTest
     }
 
 
+    [Serializable]
+    public class ComputeException : Exception
+    {
+        public ComputeException() { }
+        public ComputeException(string message) : base(message) { }
+        public ComputeException(string message, Exception inner) : base(message, inner) { }
+        protected ComputeException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
 }
