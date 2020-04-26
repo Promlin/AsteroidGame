@@ -9,6 +9,7 @@ namespace ConsoleTest.Loggers
         public TextFileLogger(string FileName)
         {
             _Writer = File.CreateText(FileName);
+            ((StreamWriter)_Writer).AutoFlush = true;
         }
 
         private int _Counter;

@@ -11,7 +11,8 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            Logger log = new TextFileLogger("text.log");
+            //Logger log = new TextFileLogger("text.log");
+            Logger log = new ConsoleLogger();
 
             log.LogInformation("Info message");
             log.LogWarning("Warning message");
