@@ -20,11 +20,13 @@ namespace ConsoleTest
             //Trace.Listeners.Add(new TextWriterTraceListener("logger.log"));
             //Trace.Listeners.Add(new XmlWriterTraceListener("logger.log.xml"));
 
-            CombineLogger log = new CombineLogger();
-            log.Add(new ConsoleLogger());
-            log.Add(new TextFileLogger("new_log.log"));
-            log.Add(new DebugOutputLogger());
-            log.Add(new TraceLogger());
+            CombineLogger combine_log = new CombineLogger();
+            combine_log.Add(new ConsoleLogger());
+            combine_log.Add(new TextFileLogger("new_log.log"));
+            combine_log.Add(new DebugOutputLogger());
+            combine_log.Add(new TraceLogger());
+
+            ILogger log = combine_log;
 
             log.LogInformation("Info message");
             log.LogWarning("Warning message");
@@ -37,10 +39,10 @@ namespace ConsoleTest
 
             Console.ReadLine();
 
-            log.Flush();//метод для записи в файл из буфера 
+            combine_log.Flush();//метод для записи в файл из буфера 
         }
 
-        private static double ComputeLongValue(int Count, Logger log)
+        private static double ComputeLongValue(int Count, ILogger log)
         {
             int result = 0;
             for (int i = 0; i < Count; i++)

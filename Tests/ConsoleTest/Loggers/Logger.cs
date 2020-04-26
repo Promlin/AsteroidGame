@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTest.Loggers
 {
-    internal abstract class Logger
+    internal abstract class Logger : ILogger
     {
         public static Logger CreateFileLogger(string FileName) //фабричный метод 
         {
