@@ -46,6 +46,24 @@ namespace ConsoleTest
                 file_logger.LogInformation("Information");
             }
 
+
+            try
+            {
+                throw new ApplicationException("Сообщение об ошибке");
+            }
+            catch (ApplicationException error)
+            {
+
+            }
+            catch (Exception error)
+            {
+                combine_log.LogError(error.ToString());
+                combine_log.LogError(error.Message);
+                throw;
+            }
+
+
+
             combine_log.Flush();//метод для записи в файл из буфера 
         }
 
