@@ -15,20 +15,43 @@ namespace ConsoleTest
             //Logger log = new TextFileLogger("text.log");
             //Logger log = new ConsoleLogger();
             //Logger log = new DebugOutputLogger();
-            Logger log = new TraceLogger();
+            //Logger log = new TraceLogger();
 
-            Trace.Listeners.Add(new TextWriterTraceListener("logger.log"));
-            Trace.Listeners.Add(new XmlWriterTraceListener("logger.log.xml"));
+            //Trace.Listeners.Add(new TextWriterTraceListener("logger.log"));
+            //Trace.Listeners.Add(new XmlWriterTraceListener("logger.log.xml"));
+
+            CombineLogger log = new CombineLogger();
+            log.Add(new ConsoleLogger());
+            log.Add(new TextFileLogger("new_log.log"));
+            log.Add(new DebugOutputLogger());
+            log.Add(new TraceLogger());
 
             log.LogInformation("Info message");
             log.LogWarning("Warning message");
             log.LogError("Error message");
 
-            log.Flush();//метод для записи в файл из буфера 
+
+
+            ComputeLongValue(50, log);
+            Console.WriteLine("Finish");
 
             Console.ReadLine();
+
+            log.Flush();//метод для записи в файл из буфера 
+        }
+
+        private static double ComputeLongValue(int Count, Logger log)
+        {
+            int result = 0;
+            for (int i = 0; i < Count; i++)
+            {
+                result++;
+                log.LogInformation($"Вычисление итерации {i}");
+                System.Threading.Thread.Sleep(100);
+            }
+            return result;
         }
     }
 
-    
+
 }
