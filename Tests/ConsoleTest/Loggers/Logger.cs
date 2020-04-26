@@ -8,6 +8,11 @@ namespace ConsoleTest.Loggers
 {
     internal abstract class Logger
     {
+        public static Logger CreateFileLogger(string FileName) //фабричный метод 
+        {
+            return new TextFileLogger(FileName);
+        }
+
         public abstract void Log(string Message);
         public void LogInformation(string Message)
         {
@@ -21,5 +26,7 @@ namespace ConsoleTest.Loggers
         {
             Log($"{DateTime.Now:s}[error]:{Message}");
         }
+
+        public virtual void Flush() { }
     }
 }

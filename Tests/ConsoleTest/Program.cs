@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleTest.Loggers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            //Logger log = new Logger();
+            Logger log = new TextFileLogger("text.log");
 
-            //log.LogInformation("Info message");
-            //log.LogWarning("Warning message");
-            //log.LogError("Error message");
+            log.LogInformation("Info message");
+            log.LogWarning("Warning message");
+            log.LogError("Error message");
+
+            log.Flush();//метод для записи в файл из буфера 
 
             Console.ReadLine();
         }
