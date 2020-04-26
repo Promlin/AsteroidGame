@@ -72,13 +72,13 @@ namespace AsteroidGame
 
             __GameObjects = new VisualObject[30];
 
-            for (int i = 0; i < 30; i++)
-            {
-                game_objects.Add(new VisualObject(
-                    new Point(600, i * 20),
-                    new Point(15 - i, 20 - i),
-                    new Size(20, 20)));
-            }
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    game_objects.Add(new VisualObject(
+            //        new Point(600, i * 20),
+            //        new Point(15 - i, 20 - i),
+            //        new Size(20, 20)));
+            //}
 
             for (int i = 0; i < 15; i++)
             {
