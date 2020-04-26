@@ -14,11 +14,14 @@ namespace AsteroidGame
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            const int Width = 800;
+            const int Height = 600;
+
             //создание формы
             Form game_form = new Form();
             //Screen.PrimaryScreen.WorkingArea.Height     для области по высоте экрана 
-            game_form.Width = 800;
-            game_form.Height = 600;
+            game_form.Width = Width;
+            game_form.Height = Height;
 
             game_form.Show();
 
