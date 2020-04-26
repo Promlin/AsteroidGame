@@ -10,17 +10,25 @@ namespace AsteroidGame
 {
     internal static class Game
     {
+        /// <summary>Интервал времени таймера формирования кадра игры</summary>
+        private const int __TimerInterval = 100;
+
         private static BufferedGraphicsContext __Context; //два подчеркивания - поле статическое
         private static BufferedGraphics __Buffer;
 
         //массив игровых объектов
         private static VisualObject[] __GameObjects;
 
-        public static int Width { get; set; }
-        public static int Height { get; set; }
+        /// <summary>Высота игрового поля</summary>
+        public static int Width { get; private set; }
+        /// <summary>Ширина игрового поля</summary>
+        public static int Height { get; private set; }
 
 
-
+        /// <summary>
+        /// Инициализация игровой логики
+        /// </summary>
+        /// <param name="form">Игровая форма</param>
         public static void Initialize(Form form) //метод для инициализации формы
         {
             Width = form.Width;
@@ -30,7 +38,7 @@ namespace AsteroidGame
             Graphics g = form.CreateGraphics();
             __Buffer = __Context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            Timer timer = new Timer { Interval = 100 };  //вызов метода при истечении интервала
+            Timer timer = new Timer { Interval = __TimerInterval };  //вызов метода при истечении интервала
             timer.Tick += OnVimerTick;
             timer.Start();
         }
@@ -40,7 +48,7 @@ namespace AsteroidGame
             Update();
             Draw();
         }
-
+        /// <summary>Отрисовка игровых объектов</summary>
         public static void Draw()
         {
             Graphics g = __Buffer.Graphics;
@@ -57,6 +65,7 @@ namespace AsteroidGame
             __Buffer.Render(); //перенесение изображения на экран
         }
 
+        /// <summary> Загрузка игровых объектов</summary>
         public static void Load()
         {
             __GameObjects = new VisualObject[30];

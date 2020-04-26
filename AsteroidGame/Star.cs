@@ -14,6 +14,8 @@ namespace AsteroidGame
 
         }
 
+        /// <summary> Отрисовка звезды</summary>
+        /// <param name="g"></param>
         public override void Draw(Graphics g)
         {
             g.DrawLine(Pens.White, _Position.X, _Position.Y, _Position.X + _Size.Width, _Position.Y + _Size.Height);
