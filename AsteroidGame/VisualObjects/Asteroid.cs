@@ -32,9 +32,6 @@ namespace AsteroidGame.VisualObjects
         {
         }
 
-        public override void Draw(Graphics g)
-        {
-            
-        }
+        
     }
 }

@@ -19,6 +19,8 @@ namespace AsteroidGame
 
         //массив игровых объектов
         private static VisualObject[] __GameObjects;
+        private static Bullet __Bullet;
+        private static SpaceShip __SpaceShip;
 
         /// <summary>Высота игрового поля</summary>
         public static int Width { get; private set; }
@@ -63,6 +65,8 @@ namespace AsteroidGame
                 game_object.Draw(g);
             }
 
+            __Bullet.Draw(g);
+
             __Buffer.Render(); //перенесение изображения на экран
         }
 
@@ -89,6 +93,21 @@ namespace AsteroidGame
                     10));
             }
 
+            Random rnd = new Random();
+
+            const int asteroid_count = 15;
+            const int asteroid_size = 25;
+            const int asteroid_max_speed = 20;
+            for (int i = 0; i < asteroid_count; i++)
+            {
+                game_objects.Add(new Asteroid(
+                    new Point(rnd.Next(0,Width), rnd.Next(0, Height)),
+                    new Point(-rnd.Next(0, asteroid_max_speed), 0), 
+                    asteroid_size));
+            }
+
+            __Bullet = new Bullet(200);
+
             __GameObjects = game_objects.ToArray();
         }
 
@@ -98,6 +117,8 @@ namespace AsteroidGame
             {
                 game_object.Update();
             }
+
+            __Bullet.Update();   
         }
 
     }

@@ -22,5 +22,10 @@ namespace AsteroidGame.VisualObjects
             g.FillEllipse(Brushes.Red, rect);   //заменить пулю на изображение
             g.DrawEllipse(Pens.White, rect);
         }
+
+        public override void Update()
+        {
+            _Position = new Point(_Position.X + 3, _Position.Y);
+        }
     }
 }
