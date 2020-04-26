@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionObject.cs" />
+    <Compile Include="ICollision.cs" />
     <Compile Include="VisualObjects\Asteroid.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
