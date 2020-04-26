@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Collections;
+using System.IO;
 
 namespace ConsoleTest
 {
@@ -28,27 +30,32 @@ namespace ConsoleTest
 
             ILogger log = combine_log;
 
-            log.LogInformation("Info message");
-            log.LogWarning("Warning message");
-            log.LogError("Error message");
+            combine_log.LogInformation("Info message");
+            combine_log.LogWarning("Warning message");
+            combine_log.LogError("Error message");
 
+            Student student = new Student { Name = "Лёня" };
 
-
-            ComputeLongValue(50, log);
+            ComputeLongValue(50, student);
             Console.WriteLine("Finish");
 
-            Console.ReadLine();
+            //Console.ReadLine();
+
+            using (var file_logger = new TextFileLogger("another.log"))
+            {
+                file_logger.LogInformation("Information");
+            }
 
             combine_log.Flush();//метод для записи в файл из буфера 
         }
 
-        private static double ComputeLongValue(int Count, ILogger log)
+        private static double ComputeLongValue(int Count, ILogger Log)
         {
             int result = 0;
             for (int i = 0; i < Count; i++)
             {
                 result++;
-                log.LogInformation($"Вычисление итерации {i}");
+                Log.Log($"Вычисление итерации {i}");
                 System.Threading.Thread.Sleep(100);
             }
             return result;

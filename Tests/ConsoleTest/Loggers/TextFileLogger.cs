@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace ConsoleTest.Loggers
 {
-    internal class TextFileLogger : Logger
+    internal class TextFileLogger : Logger, IDisposable
     {
         private readonly TextWriter _Writer;
 
@@ -23,5 +24,9 @@ namespace ConsoleTest.Loggers
             _Writer.Flush();
         }
 
+        public void Dispose()
+        {
+            _Writer.Dispose();
+        }
     }
 }
