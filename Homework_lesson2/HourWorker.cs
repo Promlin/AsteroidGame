@@ -8,14 +8,19 @@ namespace Homework_lesson2
 {
     class HourWorker : Workers
     {
-        public HourWorker(string Name, int Period, int Value)
-            : base(Name, Period, Value)
-        {
-        }
+
 
         public override void CountSum(string name, int period, int value)
         {
             Console.WriteLine("За {0} часов работник по имени {1} получит: {2} рублей", period, name, period * value);
+        }
+
+        public override void Pay(string[] nameArray, int period, int value)
+        {
+            for (int i = 0; i < FixedWorkerArr.Length; i++)
+            {
+                Console.WriteLine("За {0} часов работник по имени {1} получит: {2} рублей", period, nameArray[i], period * value);
+            }
         }
     }
 }
