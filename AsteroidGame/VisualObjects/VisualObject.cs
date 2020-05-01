@@ -5,32 +5,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AsteroidGame
+namespace AsteroidGame.VisualObjects
 {
-    class VisualObject
+
+    internal abstract class VisualObject
     {
         protected Point _Position;
         protected Point _Direction;
         protected Size _Size;
 
-        public VisualObject(Point Position, Point Direction, Size Size)
+        protected VisualObject(Point Position, Point Direction, Size Size)
         {
             _Position = Position;
             _Direction = Direction;
             _Size = Size;
         }
 
-        virtual public void Draw(Graphics g)  //отрисовка на экране
-        {
-            g.DrawEllipse(
-                Pens.White,
-                _Position.X, _Position.Y,
-                _Size.Width, _Size.Height
-                );
-            //g.DrawImage;
-            //Image asteroid = Image.FromFile("Asteroids\browmAsteroid.jpg");
-            //g.DrawImage(asteroid);
-        }
+    public abstract void Draw(Graphics g);  //отрисовка на экране
+        //{
+        //    g.DrawEllipse(
+        //        Pens.White,
+        //        _Position.X, _Position.Y,
+        //        _Size.Width, _Size.Height
+        //        );
+        //    //g.DrawImage;
+        //    //Image asteroid = Image.FromFile("Asteroids\browmAsteroid.jpg");
+        //    //g.DrawImage(asteroid);
+        //}
 
         virtual public void Update()  //обновление состояния
         {
