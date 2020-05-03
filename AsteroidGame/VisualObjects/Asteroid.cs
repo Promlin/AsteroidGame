@@ -11,6 +11,9 @@ namespace AsteroidGame.VisualObjects
     internal class Asteroid : ImageObject, ICollision
     {
         //private static readonly Image __Image = Image.FromFile("src\\brownAsteroid.jpg");
+
+        public int Power { get; set; } = 3;
+
         public Asteroid(Point Position, Point Direction, int ImageSize)
             //: base(Position, Direction, new Size(ImageSize, ImageSize), __Image)
             : base(Position, Direction, new Size(ImageSize, ImageSize), Properties.Resources.brownAsteroid) 
