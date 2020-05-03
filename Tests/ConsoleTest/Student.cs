@@ -30,7 +30,11 @@ namespace ConsoleTest
                 {
                     result += rating;
                 }
-                return result / Ratings.Count;
+
+                if (Ratings.Count != 0)
+                    return result / Ratings.Count;
+
+                return 0;
             }
         }
 
