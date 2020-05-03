@@ -30,6 +30,11 @@ namespace ConsoleTest
                 });
             }
 
+            foreach(var student in decanat)
+            {
+                Console.WriteLine(student.Name);
+            }
+
             var student_to_remove = decanat[0];
 
             decanat.Remove(student_to_remove);

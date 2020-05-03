@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace ConsoleTest   //шаблон фасад
 {
     /// <summary>класс - хранилище объектов</summary>
-    internal abstract class Storage<TItem>  //мы заранее не знаем что будем тут хранить, но позже будем работать с классом TItom
+    internal abstract class Storage<TItem> : IEnumerable<TItem> //мы заранее не знаем что будем тут хранить, но позже будем работать с классом TItom
     {
         private readonly List<TItem> _Items = new List<TItem>();
 
@@ -46,6 +47,16 @@ namespace ConsoleTest   //шаблон фасад
         public virtual void Clear()
         {
             _Items.Clear();
+        }
+
+        public IEnumerator<TItem> GetEnumerator()
+        {
+            return _Items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
