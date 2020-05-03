@@ -19,6 +19,8 @@ namespace ConsoleTest   //шаблон фасад
         //private Func<int, double, string, bool>
         private Action<TItem> _AddObservers;
 
+        public event Action<TItem> ItemRemoved; //событие
+
         public virtual TItem this[int index]
         {
             get
@@ -48,7 +50,22 @@ namespace ConsoleTest   //шаблон фасад
 
         public virtual bool Remove(TItem item)
         {
-            return _Items.Remove(item);
+            var result = _Items.Remove(item);
+
+            if (result)
+            {
+                //var handlers = ItemRemoved;
+
+                //if(handlers != null)
+                //{
+                //    handlers(item);
+                //}
+
+                ItemRemoved?.Invoke(item);
+            }
+
+            return result;
+
         }
 
         public virtual bool IsContains(TItem item)

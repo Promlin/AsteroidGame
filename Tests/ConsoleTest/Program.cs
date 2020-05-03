@@ -17,11 +17,17 @@ namespace ConsoleTest
 
     class Program
     {
+        private static void OnStudentRemoved(Student student)
+        {
+            Console.WriteLine("Студент {0} был отчислен", student.Surname);
+        }
         static void Main(string[] args)
         {
             var decanat = new Decanat();
 
             decanat.SubscribeToAdd(PrintStudent);
+            decanat.SubscribeToAdd(RateStudent);
+            decanat.ItemRemoved += OnStudentRemoved;
 
             var rnd = new Random();
 
@@ -32,7 +38,7 @@ namespace ConsoleTest
                     Name = $"Name {i}",
                     Surname = $"Surname {i}",
                     Patronimyc = $"Patronymic {i}",
-                    Ratings = rnd.GetValues(rnd.Next(20,30), 3, 6)
+                    //Ratings = rnd.GetValues(rnd.Next(20,30), 3, 6)
                 });
             }
 

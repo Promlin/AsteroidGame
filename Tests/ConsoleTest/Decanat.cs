@@ -41,9 +41,9 @@ namespace ConsoleTest
                         Patronimyc = components[2]
                     };
 
-                    var ratings = components[3].Split(';');
-                    foreach (var rating in ratings)
-                        student.Ratings.Add(int.Parse(rating));
+                    //var ratings = components[3].Split(';');
+                    //foreach (var rating in ratings)
+                    //    student.Ratings.Add(int.Parse(rating));
 
                     Add(student);
                 }
