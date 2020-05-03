@@ -41,6 +41,12 @@ namespace ConsoleTest
 
             var random_student = new Student { Name = rnd.GetValue("Алешин", "Петров", "Марочкин") };
 
+            decanat.SafeToFile("decanat.csv");
+
+            var decanat2 = new Decanat();
+
+            decanat2.LoadFromFile("decanat.csv");
+
             Console.ReadLine();
         }
     }

@@ -49,6 +49,13 @@ namespace ConsoleTest   //шаблон фасад
             _Items.Clear();
         }
 
+        public abstract void SafeToFile(string FileName);
+
+        public virtual void LoadFromFile(string FileName)
+        {
+            Clear();
+        }
+
         public IEnumerator<TItem> GetEnumerator()
         {
             return _Items.GetEnumerator();
