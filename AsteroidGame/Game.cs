@@ -21,6 +21,7 @@ namespace AsteroidGame
         private static VisualObject[] __GameObjects;
         private static Bullet __Bullet;
         private static SpaceShip __SpaceShip;
+        public static Timer __Timer;
 
         /// <summary>Высота игрового поля</summary>
         public static int Width { get; private set; }
@@ -41,9 +42,43 @@ namespace AsteroidGame
             Graphics g = form.CreateGraphics();
             __Buffer = __Context.Allocate(g, new Rectangle(0, 0, Width, Height));
 
-            Timer timer = new Timer { Interval = __TimerInterval };  //вызов метода при истечении интервала
-            timer.Tick += OnVimerTick;
-            timer.Start();
+            __Timer = new Timer { Interval = __TimerInterval };  //вызов метода при истечении интервала
+            __Timer.Tick += OnVimerTick;
+            __Timer.Start();
+
+            form.KeyDown += OnFormKeyDown;
+
+            //var test_button = new Button();   //добавление кнопки 
+            //test_button.Width = 70;
+            //test_button.Height = 30;
+            //test_button.Text = "123";
+            //test_button.Left = 20;
+            //test_button.Top = 30;
+            //test_button.Click += OnTestButtonClick;
+            //form.Controls.Add(test_button);
+        }
+
+        //private static void OnTestButtonClick(object Sender, EventArgs e)
+        //{
+        //    MessageBox.Show("Кнопка нажата");
+        //}
+
+        private static void OnFormKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.ControlKey:
+                    __Bullet = new Bullet(__SpaceShip.Rect.Y);
+                    break;
+
+                case Keys.Up:
+                    __SpaceShip.MoveUp();
+                    break;
+
+                case Keys.Down:
+                    __SpaceShip.MoveDown();
+                    break;
+            }
         }
 
         private static void OnVimerTick(object sender, EventArgs e)
@@ -65,7 +100,11 @@ namespace AsteroidGame
                 game_object?.Draw(g);
             }
 
+            __SpaceShip.Draw(g);
+
             __Bullet?.Draw(g);
+
+            if (!__Timer.Enabled) return;
 
             __Buffer.Render(); //перенесение изображения на экран
         }
@@ -109,6 +148,18 @@ namespace AsteroidGame
             __Bullet = new Bullet(200);
 
             __GameObjects = game_objects.ToArray();
+
+            __SpaceShip = new SpaceShip(new Point(10, 400), new Point(5, 5), new Size(10, 10));
+            __SpaceShip.Destroyed += OnShipDestroyed;
+        }
+
+        private static void OnShipDestroyed(object Sender, EventArgs e)
+        {
+            __Timer.Stop();
+            var g = __Buffer.Graphics;
+            g.Clear(Color.DarkBlue);
+            g.DrawString("Game over", new Font(FontFamily.GenericSerif, 60, FontStyle.Bold), Brushes.Red, 200, 100);
+            __Buffer.Render();
         }
 
         public static void Update()
@@ -120,18 +171,15 @@ namespace AsteroidGame
 
             __Bullet?.Update();
 
-            if (__Bullet is null || __Bullet.Rect.Left > Width)
-            {
-                Random rnd  = new Random();
-                __Bullet = new Bullet(rnd.Next(0, Height));
-            }
-
             for(int i = 0; i < __GameObjects.Length; i++)
             {
                 var obj = __GameObjects[i];
                 if(obj is ICollision)
-                {
+                { 
                     var collision_object = (ICollision) obj;
+
+                    __SpaceShip.CheckCollision(collision_object);
+
                     if (__Bullet != null)
                     {
                         if (__Bullet.CheckCollision(collision_object))
