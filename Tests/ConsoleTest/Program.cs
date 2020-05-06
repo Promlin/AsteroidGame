@@ -17,89 +17,116 @@ namespace ConsoleTest
 
     class Program
     {
-        private static void OnStudentRemoved(Student student)
-        {
-            Console.WriteLine("Студент {0} был отчислен", student.Surname);
-        }
+
+        private const string __NamesFile = "Names.txt";
+
         static void Main(string[] args)
         {
-            var decanat = new Decanat();
+            foreach (var student in GetStudents(__NamesFile))
+                Console.WriteLine(student.Surname + " " + student.Name + " " + student.Patronimyc);
 
-            decanat.SubscribeToAdd(PrintStudent);
-            decanat.SubscribeToAdd(RateStudent);
-            decanat.ItemRemoved += OnStudentRemoved;
+            List<Student> students_list = new List<Student>(100);
+            //students_list.Count количество элементов листа
+            //students_list.Capacity = student_list.Count;  количество выделенных ячеек/ подрезание списка
 
+            int id = 1;
             var rnd = new Random();
 
-            for(int i = 0; i < 100; i++)
+            foreach (var student in GetStudents(__NamesFile))
             {
-                decanat.Add(new Student
-                {
-                    Name = $"Name {i}",
-                    Surname = $"Surname {i}",
-                    Patronimyc = $"Patronymic {i}",
-                    //Ratings = rnd.GetValues(rnd.Next(20,30), 3, 6)
-                });
+                student.Id = id++;
+                students_list.Add(student);
+                
             }
 
-            //foreach (var student in decanat)
-            //{
-            //    Console.WriteLine(student.Name);
-            //}
+            //students_list.RemoveAt(2);
 
-            var student_to_remove = decanat[0];
+            //var student_2 = students_list[2];
+            //students_list.IndexOf(student_2);
+            //students_list.BinarySearch(); //более быстрыйй поиск
 
-            decanat.Remove(student_to_remove);
+            ////Сортировка списка по увеличению фамилии
+            //students_list.Sort((s1, s2) => StringComparer.Ordinal.Compare(s1.Surname, s2.Surname));
 
-            var random_student = new Student { Name = rnd.GetValue("Алешин", "Петров", "Марочкин") };
+            ////сортировка по имени
+            //students_list.Sort((s1, s2) => StringComparer.Ordinal.Compare(s1.Name, s2.Name));
 
-            //decanat.SafeToFile("decanat.csv");
+            students_list.Clear();
 
-            var decanat2 = new Decanat();
+            students_list.AddRange(GetStudents(__NamesFile)); //добавление студентов в список
 
-            decanat2.LoadFromFile("decanat.csv");
+            Student[] students_array = students_list.ToArray(); //превращение списка в массив
+            var new_student_list = new List<Student>(students_array); //обратно к списку
 
-            StringProcessor str_processor = new StringProcessor(GetStringLength);
-            var length = str_processor("Hello world");
-            Console.WriteLine(length);
+            var list = new ArrayList(new_student_list);
 
-            //StudentProcessor process = new StudentProcessor(PrintStudent);
-            //process(random_student);
+            list.Add(42);
+            list.Add("Hello world!");
 
-            //process = RateStudent;
-            //process(random_student);
 
-            ProcessStudent(decanat2, PrintStudent);
+            Stack<Student> student_stack = new Stack<Student>(100); //стек - элемнты друг на друге
+            foreach (var student in GetStudents(__NamesFile))
+            {
+                student_stack.Push(student);
+            }
+            var last_student = student_stack.Pop(); //достаем последего добавленного студента
 
-            var decanat3 = new Decanat();
-            ProcessStudent(decanat2, decanat3.Add);
+            Queue<Student> student_queue = new Queue<Student>(100); //очередь
+            while (student_queue.Count > 0)
+                student_queue.Enqueue(student_stack.Pop());  //преобразуем стек в очередь
+
+            Dictionary<string, List<Student>> surname_students = new Dictionary<string, List<Student>>();   //словарь - пары ключ-значение
+            foreach (var student in GetStudents(__NamesFile))
+            {
+                var surname = student.Surname;
+                if (surname_students.ContainsKey(surname))
+                    surname_students[surname].Add(student);
+                else
+                {
+                    var new_list = new List<Student>();
+                    new_list.Add(student);
+                    surname_students.Add(surname, new_list);
+                }
+
+            }
+
+            Console.WriteLine(new string('-', Console.BufferWidth));
+
+            if (surname_students.TryGetValue("Ясаев", out var students))
+            {
+                foreach (var student in students)
+                    Console.WriteLine(student);
+            }
 
             Console.ReadLine();
         }
 
-        private static int GetStringLength(string str)
+        private static IEnumerable<Student> GetStudents(string FileName)
         {
-            return str.Length;
-        }
-
-        private static void PrintStudent(Student student)
-        {
-            Console.WriteLine("[{0}]{1}{2}{3} - {4}", student.Id,
-                student.Surname, student.Name, student.Patronimyc, student.AverageRating);
-        }
-
-        private static void RateStudent(Student student)
-        {
-            var rnd = new Random();
-            student.Ratings.AddRange(rnd.GetValues(5, 2, 6));
-        }
-
-        private static void ProcessStudent(IEnumerable<Student> students, StudentProcessor Processor)
-        {
-            foreach(var student in students)
+            using (var file = File.OpenText(FileName))
             {
-                Processor(student);
+                while (!file.EndOfStream)
+                {
+                    var line = file.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+
+                    var components = line.Split(' ');
+
+                    if (components.Length != 3) continue;
+
+                    var student = new Student();
+                    student.Surname = components[0];
+                    student.Name = components[1];
+                    student.Patronimyc = components[2];
+
+                    yield return student;
+                }
             }
+
+
+            //yield return new Student();
+            //yield break;  для генератора 
         }
     }
 }
