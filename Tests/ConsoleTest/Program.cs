@@ -100,7 +100,45 @@ namespace ConsoleTest
 
             IEnumerable<Student> students = GetStudents(__NamesFile);
 
+            //var sobolev = students.First(s => s.Surname == "Соболев");
+            //Console.WriteLine(sobolev);
+            var sobolev = students.FirstOrDefault(s => s.Surname == "Соболев");
+
+            var rated_students = GetStudents(__NamesFile).ToArray();
+            var top_students = rated_students.Where(s => s.AverageRating >= 4);
+
+            var groups = GetGroups(10).ToArray();
+            //var groupped_students = rated_students.Join(
+            //    groups,
+            //    student => student.GroupID,
+            //    group => group.Id,
+            //    (Student, Group) => new
+            //    {
+            //        Student = Student,
+            //        Group = Group
+            //    }
+            //);
+
+            var groupped_students = rated_students.Join(
+                groups,
+                student => student.GroupID,
+                group => group.Id,
+                (Student, Group) => (Student: students, Group: Group)
+            );
+
+            foreach (var groupped_student in groupped_students)
+            {
+                Console.WriteLine("Студент {0} группы {1}", groupped_student.Student, groupped_student.Group.Name);
+            }
+
+
             Console.ReadLine();
+        }
+
+        public static IEnumerable<Group> GetGroups(int count)
+        {
+            foreach (var index in Enumerable.Range(1, count))
+                yield return new Group { Id = index, Name = $"группа {index}" };
         }
 
         private static IEnumerable<Student> GetStudents(string FileName)
@@ -133,5 +171,14 @@ namespace ConsoleTest
             //yield return new Student();
             //yield break;  для генератора 
         }
+    }
+
+    internal class Group
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public override string ToString() => $"[{Id}]{Name}";
     }
 }
