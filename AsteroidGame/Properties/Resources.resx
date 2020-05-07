@@ -130,7 +130,22 @@
   <data name="brownAsteroid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brownAsteroid.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lights" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lights.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="meteor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\meteor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sunlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sunlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="whitelight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\whitelight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yellowlights" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yellowlights.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

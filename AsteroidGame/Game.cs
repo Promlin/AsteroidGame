@@ -130,13 +130,13 @@ namespace AsteroidGame
                 game_objects.Add(new Star(
                     new Point(600, i * 20),
                     new Point(-i, 0),
-                    10));
+                    20));
             }
 
             Random rnd = new Random();
 
             const int asteroid_count = 15;
-            const int asteroid_size = 25;
+            const int asteroid_size = 30;
             const int asteroid_max_speed = 20;
             for (int i = 0; i < asteroid_count; i++)
             {

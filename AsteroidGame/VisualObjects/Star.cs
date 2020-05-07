@@ -21,9 +21,11 @@ namespace AsteroidGame.VisualObjects
             g.DrawLine(Pens.White, _Position.X, _Position.Y, _Position.X + _Size.Width, _Position.Y + _Size.Height);
             g.DrawLine(Pens.White, _Position.X + _Size.Width, _Position.Y, _Position.X, _Position.Y + _Size.Height);
             //g.DrawImage;
-            //Image asteroid = Image.FromFile("brownAsteroid.jpg");
+            //Image star = Properties.Resources.yellowlights;
             //Point position = new Point(20, 20);
-            //g.DrawImage(asteroid, position);
+            //g.DrawImage(star, position);
+
+            //g.DrawImage(g, position);
         }
 
         public override void Update()

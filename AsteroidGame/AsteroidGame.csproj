@@ -83,6 +83,11 @@
     <None Include="Resources\asteroid2.jpg" />
     <None Include="Resources\asteroid3.png" />
     <None Include="Resources\asteroid4.png" />
+    <None Include="Resources\redlight.png" />
+    <None Include="Resources\sunlight.png" />
+    <None Include="Resources\whitelight.png" />
+    <None Include="Resources\lights.png" />
+    <None Include="Resources\yellowlights.png" />
     <Content Include="src\brownAsteroid.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
