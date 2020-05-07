@@ -23,6 +23,10 @@ namespace AsteroidGame.VisualObjects
             var rect = new Rectangle(_Position, _Size);
             g.FillEllipse(Brushes.Red, rect);   //заменить пулю на изображение
             g.DrawEllipse(Pens.White, rect);
+            //Image bullet = Properties.Resources.bullet1;
+            //g.DrawImage;
+            //Image bullet = Properties.Resources.bullet1;
+            //g.DrawImage(bullet);
         }
 
         public override void Update()
