@@ -65,5 +65,7 @@ namespace ConsoleTest
 
             return false;
         }
+
+        public override string ToString() => $"[{Id}]:{Surname} {Name} {Patronimyc}";
     }
 }

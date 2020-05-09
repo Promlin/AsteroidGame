@@ -11,7 +11,7 @@ namespace AsteroidGame.VisualObjects
     {
         private const int __BulletSizeX = 20;
         private const int __BulletSizeY = 5;
-        private const int __BulletSpeed = 3;
+        private const int __BulletSpeed = 15;
 
         public Bullet(int Position)
             : base(new Point(0, Position), Point.Empty, new Size(__BulletSizeX, __BulletSizeY))
@@ -23,6 +23,10 @@ namespace AsteroidGame.VisualObjects
             var rect = new Rectangle(_Position, _Size);
             g.FillEllipse(Brushes.Red, rect);   //заменить пулю на изображение
             g.DrawEllipse(Pens.White, rect);
+            //Image bullet = Properties.Resources.bullet1;
+            //g.DrawImage;
+            //Image bullet = Properties.Resources.bullet1;
+            //g.DrawImage(bullet);
         }
 
         public override void Update()

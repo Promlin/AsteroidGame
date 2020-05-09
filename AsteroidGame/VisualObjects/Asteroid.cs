@@ -16,8 +16,7 @@ namespace AsteroidGame.VisualObjects
 
         public Asteroid(Point Position, Point Direction, int ImageSize)
             //: base(Position, Direction, new Size(ImageSize, ImageSize), __Image)
-            : base(Position, Direction, new Size(ImageSize, ImageSize), Properties.Resources.brownAsteroid) 
-            //TODO заменить изображение астероида
+            : base(Position, Direction, new Size(ImageSize, ImageSize), Properties.Resources.asteroid4)
         {
         }
 
