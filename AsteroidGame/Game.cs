@@ -24,7 +24,7 @@ namespace AsteroidGame
         private static SpaceShip __SpaceShip;
         public static Timer __Timer;
 
-        public static Action<String> Log { get; set; }
+        public static event Action<String> Log;
 
         /// <summary>Высота игрового поля</summary>
         public static int Width { get; private set; }
