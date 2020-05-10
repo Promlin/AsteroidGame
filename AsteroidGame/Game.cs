@@ -24,6 +24,8 @@ namespace AsteroidGame
         private static SpaceShip __SpaceShip;
         public static Timer __Timer;
 
+        public static Action<String> Log { get; set; }
+
         /// <summary>Высота игрового поля</summary>
         public static int Width { get; private set; }
         /// <summary>Ширина игрового поля</summary>
@@ -49,14 +51,7 @@ namespace AsteroidGame
 
             form.KeyDown += OnFormKeyDown;
 
-            //var test_button = new Button();   //добавление кнопки 
-            //test_button.Width = 70;
-            //test_button.Height = 30;
-            //test_button.Text = "123";
-            //test_button.Left = 20;
-            //test_button.Top = 30;
-            //test_button.Click += OnTestButtonClick;
-            //form.Controls.Add(test_button);
+            Log?.Invoke("выполнена  инициализация");
         }
 
         //private static void OnTestButtonClick(object Sender, EventArgs e)
@@ -67,9 +62,9 @@ namespace AsteroidGame
         private static int __CtrlKeyPressed;
         private static int __UpKeyPressed;
         private static int __DownKeyPressed;
-        private static void OnFormKeyDown(object sender, KeyEventArgs e)
+        private static void OnFormKeyDown(object sender, KeyEventArgs E)
         {
-            switch (e.KeyCode)
+            switch (E.KeyCode)
             {
                 case Keys.ControlKey:
                     //__Bullets.Add(new Bullet(__SpaceShip.Rect.Y));
@@ -86,6 +81,8 @@ namespace AsteroidGame
                     __DownKeyPressed++;
                     break;
             }
+
+            Log?.Invoke($"Нажата кнопка {E.KeyCode}");
         }
 
         private static void OnVimerTick(object sender, EventArgs e)
@@ -119,27 +116,24 @@ namespace AsteroidGame
         /// <summary> Загрузка игровых объектов</summary>
         public static void Load()
         {
+            Log?.Invoke("Загрузка данных сцены...");
+
             List<VisualObject> game_objects = new List<VisualObject>();
 
             __GameObjects = new VisualObject[30];
 
-            //for (int i = 0; i < 30; i++)
-            //{
-            //    game_objects.Add(new VisualObject(
-            //        new Point(600, i * 20),
-            //        new Point(15 - i, 20 - i),
-            //        new Size(20, 20)));
-            //}
-
-            for (int i = 0; i < 15; i++)
+            const int star_count = 150;
+            const int star_size = 5;
+            const int star_max_speed = 20;
+            Random rnd = new Random();
+            for (int i = 0; i < star_count; i++)   //звездный фон
             {
                 game_objects.Add(new Star(
-                    new Point(600, i * 20),
-                    new Point(-i, 0),
-                    20));
+                    new Point(rnd.Next(0, Width), rnd.Next(0, Height)),
+                    new Point(-rnd.Next(0, star_max_speed), 0),
+                    star_size));
             }
-
-            Random rnd = new Random();
+            Log?.Invoke("Создание звезд");
 
             const int asteroid_count = 15;
             const int asteroid_size = 30;
@@ -151,11 +145,15 @@ namespace AsteroidGame
                     new Point(-rnd.Next(0, asteroid_max_speed), 0), 
                     asteroid_size));
             }
+            Log?.Invoke("Создание астероиды");
+
 
             __GameObjects = game_objects.ToArray();
 
             __SpaceShip = new SpaceShip(new Point(10, 400), new Point(5, 5), new Size(10, 10));
             __SpaceShip.Destroyed += OnShipDestroyed;
+
+            Log?.Invoke("Загрузка данных сцены выполнена");
         }
 
         private static void OnShipDestroyed(object Sender, EventArgs e)
@@ -165,6 +163,7 @@ namespace AsteroidGame
             g.Clear(Color.DarkBlue);
             g.DrawString("Game over", new Font(FontFamily.GenericSerif, 60, FontStyle.Bold), Brushes.Red, 200, 100);
             __Buffer.Render();
+            Log?.Invoke("Уничтожение корабля");
         }
 
         public static void Update()
@@ -216,6 +215,7 @@ namespace AsteroidGame
                             __Bullets.Remove(bullet);
                             __GameObjects[i] = null;
                             System.Media.SystemSounds.Asterisk.Play();//TODO заменить звук
+                            Log?.Invoke("Астероид уничтожен");
                         }
                 }
             }
