@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decanat.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Loggers\CombineLogger.cs" />
     <Compile Include="Loggers\ConsoleLogger.cs" />
