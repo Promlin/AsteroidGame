@@ -64,20 +64,26 @@ namespace AsteroidGame
         //    MessageBox.Show("Кнопка нажата");
         //}
 
+        private static int __CtrlKeyPressed;
+        private static int __UpKeyPressed;
+        private static int __DownKeyPressed;
         private static void OnFormKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.ControlKey:
-                    __Bullets.Add(new Bullet(__SpaceShip.Rect.Y));
+                    //__Bullets.Add(new Bullet(__SpaceShip.Rect.Y));
+                    __CtrlKeyPressed++;
                     break;
 
                 case Keys.Up:
-                    __SpaceShip.MoveUp();
+                    //__SpaceShip.MoveUp();
+                    __UpKeyPressed++;
                     break;
 
                 case Keys.Down:
-                    __SpaceShip.MoveDown();
+                    //__SpaceShip.MoveDown();
+                    __DownKeyPressed++;
                     break;
             }
         }
@@ -163,6 +169,28 @@ namespace AsteroidGame
 
         public static void Update()
         {
+            if(__CtrlKeyPressed > 0)
+            {
+                for (int i = 0; i < __CtrlKeyPressed; i++)
+                    __Bullets.Add(new Bullet(__SpaceShip.Rect.Y));
+                __CtrlKeyPressed = 0;
+            }
+
+            if (__UpKeyPressed > 0)
+            {
+                for (int i = 0; i < __UpKeyPressed; i++)
+                    __SpaceShip.MoveUp();
+                __UpKeyPressed = 0;
+            }
+
+            if (__DownKeyPressed > 0)
+            {
+                for (int i = 0; i < __DownKeyPressed; i++)
+                    __SpaceShip.MoveDown();
+                __DownKeyPressed = 0;
+             
+            }
+
             foreach (var game_object in __GameObjects)
             {
                 game_object?.Update();
