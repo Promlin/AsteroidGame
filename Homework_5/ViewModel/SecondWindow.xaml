@@ -1,0 +1,105 @@
+﻿<Window x:Class="Homework_5.ViewModel.SecondWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Homework_5.ViewModel"
+        mc:Ignorable="d"
+        Title="SecondWindow" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Закрыть"/>
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+        </Menu>
+
+        <TabControl>
+            <TabItem Header="Департаменты">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Департаменты">
+                        <ListBox Name="DepartmentList">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="3" BorderBrush="Blue" Padding="5"
+                                            CornerRadius="3">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Department}"
+                                                       Margin="0,0,2,0"/>
+
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </GroupBox>
+
+
+                    <GroupBox Header="Работники департамента" Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding SelectedValue.Department, 
+                            ElementName=DepartmentList}" Name="EmployeeList">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="models:Employee">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Surname}" Margin="0,3,0,0"/>
+                                            <TextBlock Text="{Binding Name}" Margin="0,3,0,0"/>
+                                            <TextBlock Text="{Binding Patronymic}" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Фамилия"
+                                               HorizontalAlignment="Right"/>
+                                </Grid>
+                            </ListBox>
+                            <Grid Grid.Row="1" DataContext="{Binding SelectedIndex, ElementName=EmployeeList}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Фамилия:"
+                                               HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Имя:"
+                                               HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Отчество:"
+                                               HorizontalAlignment="Right"/>
+
+                                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Surname}"/>
+                                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Name}"/>
+                                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Patronimyc}"/>
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Работники"></TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

@@ -15,6 +15,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
         <TextBox x:Name="EmployeeTextBox" HorizontalAlignment="Left" Height="200" Margin="356,38,0,0" TextWrapping="Wrap" Text="Список работников" VerticalAlignment="Top" Width="165"/>
         <TextBox x:Name="EmployeeTitle" Foreground="Black" HorizontalAlignment="Left" Height="23" Margin="356,10,0,0" TextWrapping="Wrap" Text="Работники" VerticalAlignment="Top" Width="73" IsEnabled="False" BorderBrush="White"/>
         <Button x:Name="LoadEmployee" Content="Загрузить" HorizontalAlignment="Left" Margin="441,10,0,0" VerticalAlignment="Top" Width="76" Height="23" Click="LoadEmployee_Click" Background="#FFB0F9C1"/>
