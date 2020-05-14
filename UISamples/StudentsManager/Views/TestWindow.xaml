@@ -64,7 +64,27 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="234,153,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource ButtonStyle1}"/>
+        <Ellipse Fill="Red" Stroke="DarkBlue" StrokeThickness="4" Margin="308,174,305.6,196" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+
+        <Slider Margin="30, 0, 30, 0" VerticalAlignment="Top"/>
+        <Slider Orientation="Vertical" Margin="0, 30, 0,30" HorizontalAlignment="Left"/>
+        <Slider Orientation="Vertical" HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Height="100" Margin="0, 0, 0, 30"/>
+        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right"
+                   Width="80" Margin="0, 25, 30, 0"/>
+        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                 Width="80" Margin="25, 0, 0, 30"/>
+        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                 Width="80" Margin="0, 0, 25, 30"/>
 
     </Grid>
 </Window>
