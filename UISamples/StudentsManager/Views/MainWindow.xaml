@@ -4,9 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentsManager"
+        xmlns:services ="clr-namespace:StudentsManager.Services" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <services:StudentsManager x:Key="StudentManager"/>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Закрыть"/>
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Width="150">
+                <TextBlock Text ="Готов"/>
+            </StatusBarItem>
+            <StatusBarItem Margin="20,0,0,0">
+                <ProgressBar Width="120" Height="10" Value="40"/>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Группы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Группы">
+                        <ListBox ItemsSource="{Binding Source={StaticResource StudentManager}}">
+                            
+                        </ListBox>
+                    </GroupBox>
+                    <GroupBox Header="Студенты выбранной группы" Grid.Column="1">
+                        <ListBox>
+                            
+                        </ListBox>
+                    </GroupBox>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Студенты"></TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
