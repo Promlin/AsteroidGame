@@ -1,20 +1,11 @@
-﻿<Window x:Class="StudentsManager.MainWindow"
+﻿<Window x:Class="Homework_5.ViewModel.SecondWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StudentsManager"
-        xmlns:vm="clr-namespace:StudentsManager.ViewModels.Base"
-        xmlns:model="clr-namespace:StudentsManager.Models"
-        xmlns:services ="clr-namespace:StudentsManager.Services" xmlns:vm1="clr-namespace:StudentsManager.ViewModels.Base"
+        xmlns:local="clr-namespace:Homework_5.ViewModel"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
-    <Window.DataContext>
-        <vm1:MainWindowViewModels/>
-    </Window.DataContext>
-    <Window.Resources>
-        <services:StudentsManager x:Key="StudentManager"/>
-    </Window.Resources>
+        Title="SecondWindow" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -24,32 +15,24 @@
                 <MenuItem Header="О программе"/>
             </MenuItem>
         </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem Width="150">
-                <TextBlock Text ="{Binding Status}"/>
-            </StatusBarItem>
-            <StatusBarItem Margin="20,0,0,0">
-                <ProgressBar Width="120" Height="10" Value="40"/>
-            </StatusBarItem>
-        </StatusBar>
+
         <TabControl>
-            <TabItem Header="Группы">
+            <TabItem Header="Департаменты">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Группы">
-                        <ListBox ItemsSource="{Binding Groups, Source={StaticResource StudentManager}}"
-                                 Name="GroupsList">
+                    <GroupBox Header="Департаменты">
+                        <ListBox Name="DepartmentList">
                             <ListBox.ItemTemplate>
-                                <DataTemplate DataType="models:StudentsGroup">
+                                <DataTemplate>
                                     <Border BorderThickness="3" BorderBrush="Blue" Padding="5"
                                             CornerRadius="3">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Id, StringFormat=[{0}]}"
+                                            <TextBlock Text="{Binding Department}"
                                                        Margin="0,0,2,0"/>
-                                            <TextBlock Text="{Binding Name}"/>
+
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
@@ -59,16 +42,16 @@
                     </GroupBox>
 
 
-                    <GroupBox Header="Студенты выбранной группы" Grid.Column="1">
+                    <GroupBox Header="Работники департамента" Grid.Column="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <ListBox ItemsSource="{Binding SelectedValue.Students, 
-                            ElementName=GroupsList}" Name="StudentsList">
+                            <ListBox ItemsSource="{Binding SelectedValue.Department, 
+                            ElementName=DepartmentList}" Name="EmployeeList">
                                 <ListBox.ItemTemplate>
-                                    <DataTemplate DataType="models:Student">
+                                    <DataTemplate DataType="models:Employee">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Surname}" Margin="0,3,0,0"/>
                                             <TextBlock Text="{Binding Name}" Margin="0,3,0,0"/>
@@ -89,7 +72,7 @@
                                                HorizontalAlignment="Right"/>
                                 </Grid>
                             </ListBox>
-                            <Grid Grid.Row="1" DataContext="{Binding SelectedIndex, ElementName=StudentsList}">
+                            <Grid Grid.Row="1" DataContext="{Binding SelectedIndex, ElementName=EmployeeList}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
@@ -113,10 +96,10 @@
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    
+
                 </Grid>
             </TabItem>
-            <TabItem Header="Студенты"></TabItem>
+            <TabItem Header="Работники"></TabItem>
         </TabControl>
     </DockPanel>
 </Window>
