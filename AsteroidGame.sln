@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework_5", "Homework_5\Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsManager", "UISamples\StudentsManager\StudentsManager.csproj", "{F719F06D-8251-4C57-B23F-6FC7058A599F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{BD24F9D9-E3B3-43D8-9516-17FF90CC9686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetTest", "DataBase\AdoNetTest\AdoNetTest.csproj", "{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{F719F06D-8251-4C57-B23F-6FC7058A599F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F719F06D-8251-4C57-B23F-6FC7058A599F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F719F06D-8251-4C57-B23F-6FC7058A599F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{731FE62B-1A2B-4F37-B855-218BE32D75CC} = {A00FA063-502F-45E2-AB15-925798CA8662}
 		{FC95EE0F-54A2-442E-8F3B-918D1A0106CB} = {ADC03EE9-BF02-416A-AE48-F98572C438B5}
 		{F719F06D-8251-4C57-B23F-6FC7058A599F} = {A00FA063-502F-45E2-AB15-925798CA8662}
+		{3BD1C305-05BD-4D2C-AFE2-5FB397026DCD} = {BD24F9D9-E3B3-43D8-9516-17FF90CC9686}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {672C50D6-8BC5-4F19-8ECB-6FB796B9036D}
