@@ -27,8 +27,9 @@ namespace AdoNetTest
             var connection_string = ConfigurationManager.ConnectionStrings[connection_string_name].ConnectionString;
             //ExecuteNonQuery(connection_string);
             //ExecuteScalar(connection_string);
-            ExecuteReader(connection_string);
-            ExecuteScalar(connection_string);
+            //ExecuteReader(connection_string);
+            //ExecuteScalar(connection_string);
+            DataAdapter(connection_string);
 
             Console.ReadLine();
         }
@@ -117,6 +118,18 @@ CREATE TABLE [dbo].[Player]
                 select_command.Parameters.Add(birthday);
                 birthday.Value = "13.10.2000";
                 var count = (int)select_command.ExecuteScalar();
+            }
+        }
+
+        private static void DataAdapter(string ConnectionString)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var adapter = new SqlDataAdapter();
+                adapter.SelectCommand = new SqlCommand("SELECT * FROM Player", connection);
+
+                var table = new DataTable();
+                adapter.Fill(table);
             }
         }
     }
