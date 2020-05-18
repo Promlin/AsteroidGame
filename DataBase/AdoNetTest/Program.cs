@@ -130,6 +130,30 @@ CREATE TABLE [dbo].[Player]
 
                 var table = new DataTable();
                 adapter.Fill(table);
+
+                adapter.DeleteCommand = new SqlCommand(@"DELETE FROM Player WHERE ID=@ID", connection)
+                {
+                    Parameters =
+                    {
+                        {"@ID", SqlDbType.Int, 0, "ID" }
+                    }
+                };
+                adapter.DeleteCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+
+                var data_set = new DataSet();
+                adapter.Fill(data_set);
+                var table2 = data_set.Tables[0];
+                var row = table2.NewRow();
+                row["Name"] = "name";
+                table2.Rows.Add(row);
+
+                adapter.Update(data_set);
+
+                var adapter2 = new SqlDataAdapter("SELECT * FROM Player", connection);
+                var builder = new SqlCommandBuilder(adapter2);
+                adapter2.InsertCommand = builder.GetInsertCommand();
+                adapter2.InsertCommand = builder.GetUpdateCommand();
+                adapter2.InsertCommand = builder.GetDeleteCommand();
             }
         }
     }
