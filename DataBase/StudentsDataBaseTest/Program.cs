@@ -10,6 +10,7 @@ namespace StudentsDataBaseTest
     {
         static void Main(string[] args)
         {
+
             Console.ReadLine();
         }
     }
