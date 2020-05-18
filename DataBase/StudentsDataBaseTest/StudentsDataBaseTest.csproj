@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Data\Entityes\Course.cs" />
     <Compile Include="Data\Entityes\Student.cs" />
+    <Compile Include="Data\StudentsDB.cs" />
     <Compile Include="Data\Entityes\StudentsGroup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
