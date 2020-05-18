@@ -4,8 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentsDataBaseTest.Data.Entityes;
 
-namespace StudentsDataBaseTest.Data.Entityes
+namespace StudentsDataBaseTest.Data
 {
     public class StudentsDB : DbContext
     {
