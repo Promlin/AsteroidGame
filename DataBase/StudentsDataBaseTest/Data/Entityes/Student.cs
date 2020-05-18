@@ -13,9 +13,9 @@ namespace StudentsDataBaseTest.Data.Entityes
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
-        public StudentsGroup Group { get; set; }
+        public virtual StudentsGroup Group { get; set; }
 
-        public ICollection<Course> Courses { get; set; } = new List<Course>();
+        public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
     }
 
     
