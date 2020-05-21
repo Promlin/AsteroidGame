@@ -1,9 +1,13 @@
-﻿using System;
+﻿using FileHosting.Interfaces;
+using FileHosting.Services;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -38,6 +42,28 @@ namespace FileHosting
             //    s1 = (Student)binary_formatter.Deserialize(bin_file);
             //    s2 = (Student)xml_serializer.Deserialize(xml_file);
             //}
+
+            var host = new ServiceHost(typeof(FileService),
+                new Uri("http://localhost:8080/FileService")
+                //new Uri("net.tcp://localhost/FileService"),
+                //new Uri("net.pipe://localhost/FileService")
+                );
+
+            host.AddServiceEndpoint(
+                typeof(IFileService),
+                new BasicHttpBinding(),
+                "http://localhost:8080/FileService"
+                );
+
+            host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true });
+
+            host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "Mex");
+
+            host.Open();
+
+            Console.WriteLine("Хост запущен");
+            Console.ReadLine();
+
         }
 
         
