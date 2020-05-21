@@ -16,14 +16,14 @@ namespace ConsoleClient
         {
             var client = new FileServiceClient(new BasicHttpBinding(), new EndpointAddress("http://localhost:8080/FileService"));
 
-            var files = client.GetFiles("c:\\GeekBrains");
+            //var files = client.GetFiles("C:\\GeekBrains");
 
-            foreach(var file in files)
-            {
-                Console.WriteLine(file.FullName);
-            }
+            //foreach(var file in files)
+            //{
+            //    Console.WriteLine(file.FullName);
+            //}
 
-            client.StartProcess("calc", "");
+            client.StartProcess("calc","");
 
             Console.ReadLine();
         }

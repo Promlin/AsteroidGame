@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.ServiceModel;
-using FileHosting.Interfaces.DataMode_s;
+using FileHosting.Interfaces.DataModels;
 
 namespace FileHosting.Interfaces
 {
